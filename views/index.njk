@@ -1,0 +1,40 @@
+{% extends "_layout.njk" %}
+
+{% block style %}
+<style>
+  .uk-divider-icon + h2 {
+    margin-top: 0;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+  {% if authError %}
+    <div class="uk-alert uk-alert-danger">
+      <p>{{ authError }}</p>
+    </div>
+  {% endif %}
+
+  {% if successMessage %}
+    <div class="uk-alert uk-alert-success">
+      <p>{{ successMessage }}</p>
+    </div>
+  {% endif %}
+
+  <h2>Войти</h2>
+  <form method="POST" action="/login" enctype="application/x-www-form-urlencoded">
+    <p><input type="text" name="username" class="uk-input" placeholder="Имя пользователя"></p>
+    <p><input type="password" name="password" class="uk-input" placeholder="Пароль"></p>
+    <p><button class="uk-button uk-button-primary">Вход</button></p>
+  </form>
+
+  <hr class="uk-divider-icon" />
+
+  <h2>Зарегистрироваться</h2>
+  <form method="POST" action="/signup" enctype="application/x-www-form-urlencoded">
+    <p><input type="text" name="username" class="uk-input" placeholder="Имя пользователя"></p>
+    <p><input type="password" name="password" class="uk-input" placeholder="Пароль"></p>
+    <p><button class="uk-button uk-button-primary">Создать аккаунт</button></p>
+  </form>
+{% endblock %}

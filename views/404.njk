@@ -1,0 +1,23 @@
+{% extends "_layout.njk" %}
+
+{% block style %}
+<style>
+  .uk-container {
+    height: calc(100vh - 40px);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+  <div class="uk-container uk-flex uk-flex-column uk-flex-middle uk-flex-center">
+    <h1 class="uk-margin-remove">404</h1>
+
+    <h2 class="uk-margin-medium-top uk-margin-large-bottom">Страница не найдена</h2>
+
+    <a href="/" class="uk-button uk-button-primary uk-margin-remove">
+        На главную
+    </a>
+  </div>
+
+{% endblock %}
