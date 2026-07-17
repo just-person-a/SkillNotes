@@ -404,6 +404,8 @@ app.get('/api/notes/:id/pdf', authMiddleware, async (req, res) => {
       return res.status(404).send('Такая заметка не существует!');
     }
 
+    console.log(await puppeteer.executablePath());
+
     browser = await puppeteer.launch();
     const page = await browser.newPage();
 
