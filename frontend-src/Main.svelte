@@ -148,7 +148,7 @@
       {/if}
     {:catch error}
       <div class="uk-alert uk-alert-danger">
-        <p>Ошибка: {error.message}.</p>
+        <p>Ошибка: {error.message}</p>
       </div>
     {/await}
   </aside>

@@ -151,6 +151,8 @@ app.post('/signup', async (req, res) => {
       successMessage: 'Регистрация завершена. Используйте ваши имя и пароль для входа!',
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось зарегистрировать пользователя. Попробуйте снова.');
   }
 });
@@ -188,6 +190,8 @@ app.post('/login', async (req, res) => {
 
     return res.status(200).redirect('/dashboard');
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось выполнить вход. Попробуйте снова.');
   }
 });
@@ -208,6 +212,8 @@ app.get('/logout', async (req, res) => {
 
     return res.redirect('/');
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось выйти из системы. Попробуйте снова.');
   }
 });
@@ -268,6 +274,8 @@ app.get('/api/notes', authMiddleware, async (req, res) => {
       hasMore: hasMore,
     });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось загрузить список заметок. Попробуйте обновить страницу.');
   }
 });
@@ -281,6 +289,8 @@ app.post('/api/notes', authMiddleware, async (req, res) => {
 
     return res.status(201).json(note);
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось сохранить заметку. Попробуйте снова.');
   }
 });
@@ -298,6 +308,8 @@ app.get('/api/notes/:id', authMiddleware, async (req, res) => {
 
     return res.status(200).json(note);
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось загрузить заметку. Попробуйте обновить страницу.');
   }
 });
@@ -339,6 +351,8 @@ app.patch('/api/notes/:id', authMiddleware, async (req, res) => {
 
     return res.status(200).json(note);
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось сохранить изменения. Попробуйте снова.');
   }
 });
@@ -356,6 +370,8 @@ app.delete('/api/notes/:id', authMiddleware, async (req, res) => {
 
     return res.status(200).json({ success: true });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось удалить заметку. Попробуйте снова.');
   }
 });
@@ -369,6 +385,8 @@ app.delete('/api/notes', authMiddleware, async (req, res) => {
 
     return res.status(200).json({ success: true });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).send('Не удалось удалить архивные заметки. Попробуйте снова.');
   }
 });
@@ -410,15 +428,16 @@ app.get('/api/notes/:id/pdf', authMiddleware, async (req, res) => {
 
     res.setHeader(
       'Content-Disposition',
-      `attachment; filename="${
-        encodeURIComponent(sanitizeFilename(note.title)) || 'note'}.pdf"`
-      );
+      `attachment; filename="${encodeURIComponent(sanitizeFilename(note.title)) || 'note'}.pdf"`
+    );
 
     await page.close();
 
     return res.send(Buffer.from(pdf));
   } catch (error) {
     if (!res.headersSent) {
+      console.error(error);
+
       return res.status(500).send('Не удалось сформировать PDF. Попробуйте снова.');
     }
   } finally {
