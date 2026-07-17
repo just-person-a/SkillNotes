@@ -67,6 +67,6 @@
   <div class="uk-margin"><textarea bind:this={textarea} class="uk-textarea" /></div>
 {:catch error}
   <div class="uk-alert uk-alert-danger">
-    <p>Ошибка: {error.message}.</p>
+    <p>Ошибка: {error.message}</p>
   </div>
 {/await}
